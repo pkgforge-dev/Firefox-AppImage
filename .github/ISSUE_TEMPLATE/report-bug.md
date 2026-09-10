@@ -14,7 +14,7 @@ Please fill out the sections below.
    - Attach that file to this issue.
 
 ## Make sure to ping the maintainer of the repository when making the bug report
-- Often times we miss emails because not all repositories are watched automatically after being made, so please ping the maintainer of the repository when making the issue. Simply add @name-of-maintainer. 
+- Often times we miss emails because not all repositories are watched automatically after being made, so please ping the maintainer of the repository when making the issue. Simply add @ArqamQazi. 
 
 ## Checklist
 - [ ] I ran the AppImage with `APPIMAGE_DEBUG=1` environment variable set.
