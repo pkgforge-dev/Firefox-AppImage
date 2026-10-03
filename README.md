@@ -12,9 +12,10 @@
 </p>
 
 
-| Latest Stable Release | Upstream URL |
-| :---: | :---: |
-| [Download](https://github.com/pkgforge-dev/Firefox-AppImage/releases/latest) | [Click here](https://www.mozilla.org/firefox) |
+| Architecture | Latest Stable Release | Upstream URL |
+| :---: | :---: | :---: |
+| x86_64 (64-bit Intel/AMD) | [Download](https://github.com/pkgforge-dev/Firefox-AppImage/releases/latest/download/Firefox-157.0-anylinux-x86_64.AppImage) | [Click here](https://www.mozilla.org/firefox) |
+| aarch64 (64-bit ARM) | [Download](https://github.com/pkgforge-dev/Firefox-AppImage/releases/latest/download/Firefox-157.0-anylinux-aarch64.AppImage) | [Click here](https://www.mozilla.org/firefox) |
 
 </div>
 
