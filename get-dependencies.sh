@@ -19,7 +19,23 @@ case "$ARCH" in
 	aarch64) farch=linux64-aarch64;;
 esac
 
-TARBALL_LINK=$(curl -sI "https://download.mozilla.org/?product=firefox-latest-ssl&os=$farch&lang=en-US" | grep -i '^location:' | awk '{print $2}' | tr -d '\r')
+FIREFOX_CHANNEL=${FIREFOX_CHANNEL:-stable}
+case "$FIREFOX_CHANNEL" in
+	beta)
+		product="firefox-beta-latest-ssl"
+		;;
+	devedition)
+		product="firefox-devedition-latest-ssl"
+		;;
+	esr)
+		product="firefox-esr-latest-ssl"
+		;;
+	*)
+		product="firefox-latest-ssl"
+		;;
+esac
+
+TARBALL_LINK=$(curl -sI "https://download.mozilla.org/?product=$product&os=$farch&lang=en-US" | grep -i '^location:' | awk '{print $2}' | tr -d '\r')
 
 wget --retry-connrefused --tries=30 "$TARBALL_LINK" -O ./"${TARBALL_LINK##*/}"
 
@@ -27,4 +43,4 @@ mkdir -p ./AppDir/bin
 tar -xvf ./"${TARBALL_LINK##*/}"
 mv -v ./firefox/* ./AppDir/bin
 
-echo "$TARBALL_LINK" | grep -oP 'releases/\K[0-9.]+' > ~/version
+echo "$TARBALL_LINK" | grep -oP 'releases/\K[^/]+(?=/linux)' > ~/version
