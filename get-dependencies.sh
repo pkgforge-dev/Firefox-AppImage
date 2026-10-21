@@ -4,13 +4,25 @@ set -eu
 
 ARCH=$(uname -m)
 
+# A port mirror can drop a connection mid transaction, and pacman then
+# blacklists that host for the rest of it. The blacklist dies with the alpm
+# handle, so running the transaction again gets a fresh set of servers.
+retry() {
+	n=0
+	while ! "$@"; do
+		n=$((n + 1))
+		[ "$n" -lt 3 ] || return 1
+		sleep 5
+	done
+}
+
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-pacman -Syu --noconfirm libcanberra
+retry pacman -Syu --noconfirm libcanberra
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
-get-debloated-pkgs --add-common --prefer-nano intel-media-driver-mini ffmpeg-mini
+retry get-debloated-pkgs --add-common --prefer-nano intel-media-driver-mini ffmpeg-mini
 
 echo "Downloading Firefox..."
 echo "---------------------------------------------------------------"
